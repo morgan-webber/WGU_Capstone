@@ -72,7 +72,7 @@ class Ui_Dashboard(object):
         self.progressBarSlider.setObjectName("progressBarSlider")
         self.btnTrainCHAD = QPushButton(self.centralwidget)
         self.btnTrainCHAD.setObjectName(u"btnTrainCHAD")
-        self.btnTrainCHAD.setGeometry(QRect(680, 480, 75, 23))
+        self.btnTrainCHAD.setGeometry(QRect(680, 480, 80, 25))
         self.btnTrainCHAD.setText("Train CHAD")
         self.lblClass = QLabel(self.centralwidget)
         self.lblClass.setObjectName(u"lblClass")
@@ -104,6 +104,22 @@ class Ui_Dashboard(object):
         self.statusbar.setObjectName("statusbar")
         Dashboard.setStatusBar(self.statusbar)
 
+        # Add buttons for data visualization
+        self.btnBarPlot = QtWidgets.QPushButton(Dashboard)
+        self.btnBarPlot.setGeometry(QtCore.QRect(580, 480, 80, 25))
+        self.btnBarPlot.setText("Bar")
+        self.btnBarPlot.clicked.connect(self.displayBarPlot)
+
+        self.btnLinePlot = QtWidgets.QPushButton(Dashboard)
+        self.btnLinePlot.setGeometry(QtCore.QRect(480, 480, 80, 25))
+        self.btnLinePlot.setText("Line")
+        self.btnLinePlot.clicked.connect(self.displayLinePlot)
+
+        self.btnScatterPlot = QtWidgets.QPushButton(Dashboard)
+        self.btnScatterPlot.setGeometry(QtCore.QRect(380, 480, 80, 25))
+        self.btnScatterPlot.setText("Scatter")
+        self.btnScatterPlot.clicked.connect(self.displayScatterPlot)
+
         self.retranslateUi(Dashboard)
         QtCore.QMetaObject.connectSlotsByName(Dashboard)
 
@@ -128,6 +144,28 @@ class Ui_Dashboard(object):
         # Set chad's reporting label
         self.chad.report_label = self.lblClass
 
+
+    def displayBarPlot(self):
+        data = {"Light": 165, "Medium": 45, "Heavy": 44}
+        cat = data.keys()
+        values = data.values()
+
+        fig = plt.figure(figsize=(10, 5))
+
+        # creating the bar plot
+        plt.bar(cat, values, color=['green', 'yellow', 'red'],
+                width=0.4)
+
+        plt.xlabel("Class")
+        plt.ylabel("No. of training videos")
+        plt.title("Training videos by classification")
+        plt.show()
+
+    def displayLinePlot(self):
+        return 0
+
+    def displayScatterPlot(self):
+        return 0
 
     def retranslateUi(self, Dashboard):
         _translate = QtCore.QCoreApplication.translate
